@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using MongoExample.API.DataAccess;
 using MongoExample.API.Repositories;
 
@@ -26,6 +27,11 @@ app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
 app.UseAuthorization();
 
