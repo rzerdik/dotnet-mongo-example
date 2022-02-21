@@ -13,6 +13,10 @@ public class CarContext : ICarContext
     {
         var client = new MongoClient(options.Value.ConnectionString);
         _db = client.GetDatabase(options.Value.DatabaseName);
+
+        CarsContext.Indexes.CreateOne(
+            new CreateIndexModel<Car>(Builders<Car>.IndexKeys.Ascending(c => c.VIN),
+                new CreateIndexOptions {Unique = true}));
     }
 
     public IMongoCollection<Car> CarsContext => _db.GetCollection<Car>(CollectionName);

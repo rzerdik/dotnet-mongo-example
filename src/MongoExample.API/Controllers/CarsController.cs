@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using MongoExample.API.Dtos;
 using MongoExample.API.Models;
 using MongoExample.API.Repositories;
@@ -33,7 +34,7 @@ public class CarsController : ControllerBase
     [HttpGet("{VIN}", Name = "GetCarByVIN")]
     public async Task<ActionResult<CarReadDto>> GetCarByVIN(int VIN)
     {
-        var car = _repository.GetCarByVINAsync(VIN).Result;
+        var car = await _repository.GetCarByVINAsync(VIN);
 
         if (car is null)
             return NotFound();
@@ -45,7 +46,18 @@ public class CarsController : ControllerBase
     public async Task<ActionResult<CarReadDto>> CreateCar(CarCreateDto carCreateDto)
     {
         var carModel = _mapper.Map<Car>(carCreateDto);
-        _ = _repository.CreateCarAsync(carModel);
+        try
+        {
+            await _repository.CreateCarAsync(carModel);
+        }
+        catch (MongoWriteException)
+        {
+            return BadRequest("VIN code already exists. Please use a unique value");
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
 
         var carReadDto = _mapper.Map<CarReadDto>(carModel);
 
@@ -55,12 +67,12 @@ public class CarsController : ControllerBase
     [HttpDelete("{VIN}")]
     public async Task<ActionResult> DeleteCar(int VIN)
     {
-        var carModelFromRepo = _repository.GetCarByVINAsync(VIN).Result;
+        var carModelFromRepo = await _repository.GetCarByVINAsync(VIN);
 
         if (carModelFromRepo is null)
             return NotFound();
 
-        _repository.DeleteCarAsync(carModelFromRepo);
+        await _repository.DeleteCarAsync(carModelFromRepo);
 
         return NoContent();
     }
