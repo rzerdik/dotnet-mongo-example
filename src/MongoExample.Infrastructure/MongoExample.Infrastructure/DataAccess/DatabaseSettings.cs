@@ -1,4 +1,4 @@
-namespace MongoExample.API.DataAccess;
+namespace MongoExample.Infrastructure.DataAccess;
 
 public class DatabaseSettings
 {

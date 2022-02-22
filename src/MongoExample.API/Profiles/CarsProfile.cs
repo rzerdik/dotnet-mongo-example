@@ -8,7 +8,7 @@ public class CarsProfile : Profile
 {
     public CarsProfile()
     {
-        CreateMap<Car, CarReadDto>();
-        CreateMap<CarCreateDto, Car>();
+        _ = CreateMap<Car, CarReadDto>();
+        _ = CreateMap<CarCreateDto, Car>();
     }
 }

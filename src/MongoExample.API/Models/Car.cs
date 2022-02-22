@@ -18,6 +18,6 @@ public class Car
 
     [Required]
     public string Model { get; set; } = default!;
-    
+
     public DateTime DateManufactured { get; set; }
 }
