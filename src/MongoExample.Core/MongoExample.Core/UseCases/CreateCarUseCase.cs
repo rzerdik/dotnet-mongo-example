@@ -1,5 +1,4 @@
-﻿using MongoExample.API.Repositories;
-using MongoExample.Core.Boundaries;
+﻿using MongoExample.Core.Boundaries;
 using MongoExample.Core.Boundaries.DataAccess;
 using MongoExample.Core.Boundaries.UseCases.CreateCar;
 

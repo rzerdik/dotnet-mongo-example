@@ -1,5 +1,5 @@
 using MongoDB.Driver;
-using MongoExample.API.Repositories;
+using MongoExample.Core.Boundaries.DataAccess;
 using MongoExample.Core.Entities;
 using MongoExample.Infrastructure.Entities;
 

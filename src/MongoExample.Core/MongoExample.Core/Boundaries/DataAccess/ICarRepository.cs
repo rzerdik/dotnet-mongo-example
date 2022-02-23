@@ -1,6 +1,6 @@
 using MongoExample.Core.Entities;
 
-namespace MongoExample.API.Repositories;
+namespace MongoExample.Core.Boundaries.DataAccess;
 
 public interface ICarRepository
 {

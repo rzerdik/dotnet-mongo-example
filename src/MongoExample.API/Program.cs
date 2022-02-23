@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Options;
 using MongoExample.API.Presenters;
-using MongoExample.API.Repositories;
 using MongoExample.Core.Boundaries;
 using MongoExample.Core.Boundaries.DataAccess;
 using MongoExample.Core.Boundaries.UseCases.CreateCar;
